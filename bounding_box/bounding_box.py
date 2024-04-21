@@ -29,7 +29,7 @@ _COLOR_NAME_TO_RGB = dict(
     black=((24, 24, 24), (220, 220, 220)),
     gray=((168, 168, 168), (0, 0, 0)),
     silver=((220, 220, 220), (0, 0, 0)),
-    brown=((165, 42, 42), (210, 105, 30)
+    brown=((165, 42, 42), (210, 105, 30))
 )
 
 _COLOR_NAMES = list(_COLOR_NAME_TO_RGB)

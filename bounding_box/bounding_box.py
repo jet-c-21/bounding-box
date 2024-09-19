@@ -83,6 +83,7 @@ def add(image, left, top, right, bottom, label=None, color=None):
 
     if color not in _COLOR_NAME_TO_RGB:
         msg = "'color' must be one of " + ", ".join(_COLOR_NAME_TO_RGB)
+        msg = f"{msg}, but got: {color}"
         raise ValueError(msg)
 
     colors = [_rgb_to_bgr(item) for item in _COLOR_NAME_TO_RGB[color]]

@@ -9,10 +9,11 @@ from PIL import ImageFont
 import numpy as _np
 from hashlib import md5 as _md5
 
-_LOC = _path.realpath(_path.join(_os.getcwd(),_path.dirname(__file__)))
+_LOC = _path.realpath(_path.join(_os.getcwd(), _path.dirname(__file__)))
 
-#https://clrs.cc/
+# https://clrs.cc/
 _COLOR_NAME_TO_RGB = dict(
+    # color_name=(main_color_tuple, for_text_color_tuple)
     navy=((0, 38, 63), (119, 193, 250)),
     blue=((0, 120, 210), (173, 220, 252)),
     aqua=((115, 221, 252), (0, 76, 100)),
@@ -29,7 +30,8 @@ _COLOR_NAME_TO_RGB = dict(
     black=((24, 24, 24), (220, 220, 220)),
     gray=((168, 168, 168), (0, 0, 0)),
     silver=((220, 220, 220), (0, 0, 0)),
-    brown=((196, 98, 0), (210, 105, 30))
+    brown=((196, 98, 0), (210, 105, 30)),
+    pink=((255, 182, 193), (255, 105, 180))
 )
 
 _COLOR_NAMES = list(_COLOR_NAME_TO_RGB)
@@ -40,11 +42,14 @@ _FONT_PATH = _os.path.join(_LOC, "Ubuntu-B.ttf")
 _FONT_HEIGHT = 15
 _FONT = ImageFont.truetype(_FONT_PATH, _FONT_HEIGHT)
 
+
 def _rgb_to_bgr(color):
     return list(reversed(color))
 
+
 def _color_image(image, font_color, background_color):
     return background_color + (font_color - background_color) * image / 255
+
 
 def _get_label_image(text, font_color_tuple_bgr, background_color_tuple_bgr):
     text_image = _FONT.getmask(text)
@@ -58,6 +63,7 @@ def _get_label_image(text, font_color_tuple_bgr, background_color_tuple_bgr):
     ]
 
     return np.concatenate(image).transpose(1, 2, 0)
+
 
 def add(image, left, top, right, bottom, label=None, color=None):
     if type(image) is not _np.ndarray:
@@ -94,7 +100,7 @@ def add(image, left, top, right, bottom, label=None, color=None):
     if label:
         _, image_width, _ = image.shape
 
-        label_image =  _get_label_image(label, color_text, color)
+        label_image = _get_label_image(label, color_text, color)
         label_height, label_width, _ = label_image.shape
 
         rectangle_height, rectangle_width = 1 + label_height, 1 + label_width

@@ -1,3 +1,7 @@
+# folder
+/.idea
+
+# files
 *.egg-info
 *.vscode
 dist
